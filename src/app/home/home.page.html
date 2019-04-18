@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      msgApp Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" offset-md="3">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Login</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item>
+                <ion-label position="floating">E-mail</ion-label>
+                <ion-input [(ngModel)]="usuario.email" clearInput></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Senha</ion-label>
+                <ion-input [(ngModel)]="usuario.senha" clearInput></ion-input>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col size-md="5" offset-md="3">
+              <ion-button padding-start="3" (click)="logar()">
+                  <ion-icon padding-end="5" name="add-circle-outline"></ion-icon>
+                  Logar
+              </ion-button>
+          </ion-col>
+          <ion-col size-md="5" offset-md="3">
+            <ion-button padding-start="3" (click)="cadastrar()">
+                <ion-icon padding-end="5" name="add-circle-outline"></ion-icon>
+                Cadastrar
+            </ion-button>
+        </ion-col>          
+      </ion-row>        
+    </ion-grid>
+  </div>
+</ion-content>
