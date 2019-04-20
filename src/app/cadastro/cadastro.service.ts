@@ -1,21 +1,32 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Usuario } from '../usuario/usuario.model';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CadastroService {
 
-  constructor(public db: AngularFirestore) {
+  private usuarios: Usuario[];
+  constructor(private db: AngularFirestore) {
   }
 
   cadastrarUsuario(usuario: Usuario) {
-   return this.db.collection('usuarios').add({
-      email: usuario.email,
-      nome: usuario.nome,
-      senha: usuario.senha
-    });
+    console.log(usuario.serialize());
+   return this.db.collection('usuarios').add(usuario.serialize());
   }
+
+  async consultarUsuario() {
+    this.usuarios = [];
+    const self = this;
+    const q: firebase.firestore.QuerySnapshot = await this.db.collection('usuarios').get().toPromise();
+
+    q.forEach(function(queryDocument) {
+      self.usuarios.push(new Usuario().deserialize(queryDocument.data()));
+    });
+
+    return this.usuarios;
+  }
+
 }
