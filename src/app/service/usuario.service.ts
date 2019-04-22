@@ -6,14 +6,14 @@ import { Usuario } from '../usuario/usuario.model';
 @Injectable({
   providedIn: 'root'
 })
-export class CadastroService {
+export class UsuarioService {
+
 
   private usuarios: Usuario[];
   constructor(private db: AngularFirestore) {
   }
 
   cadastrarUsuario(usuario: Usuario) {
-    console.log(usuario.serialize());
    return this.db.collection('usuarios').add(usuario.serialize());
   }
 
@@ -28,5 +28,4 @@ export class CadastroService {
 
     return this.usuarios;
   }
-
 }

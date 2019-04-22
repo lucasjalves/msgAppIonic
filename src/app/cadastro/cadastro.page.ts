@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../usuario/usuario.model';
-import { CadastroService } from './cadastro.service';
+import { UsuarioService } from '../service/usuario.service';
 import { AlertController } from '@ionic/angular';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,7 +12,7 @@ import { AlertController } from '@ionic/angular';
 export class CadastroPage implements OnInit {
 
   public usuario: Usuario = new Usuario();
-  constructor(private service: CadastroService, private alertController: AlertController) {}
+  constructor(private service: UsuarioService, private alertController: AlertController, private router: Router) {}
 
   ngOnInit() {
   }
@@ -50,6 +50,9 @@ export class CadastroPage implements OnInit {
 
   }
 
+  voltar() {
+    this.router.navigateByUrl('/home');
+  }
   async isUsuarioCadastrado() {
     const self = this;
     let u: Usuario[] = await this.service.consultarUsuario();

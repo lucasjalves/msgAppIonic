@@ -8,6 +8,7 @@
 
 <ion-content>
   <div class="ion-padding">
+    <form #f="ngForm">
     <ion-grid>
       <ion-row>
         <ion-col size-md="6" offset-md="3">
@@ -18,31 +19,32 @@
             <ion-card-content>
               <ion-item>
                 <ion-label position="floating">E-mail</ion-label>
-                <ion-input [(ngModel)]="usuario.email" clearInput></ion-input>
+                <ion-input [(ngModel)]="usuario.email"  clearInput required name="email" ></ion-input> 
               </ion-item>
 
               <ion-item>
                 <ion-label position="floating">Senha</ion-label>
-                <ion-input [(ngModel)]="usuario.senha" clearInput></ion-input>
+                <ion-input [(ngModel)]="usuario.senha"  clearInput required name="senha"></ion-input>
               </ion-item>
             </ion-card-content>
           </ion-card>
         </ion-col>
       </ion-row>
       <ion-row>
-          <ion-col size-md="5" offset-md="3">
-              <ion-button padding-start="3" (click)="logar()">
+          <ion-col size-md="1" offset-md="3">
+              <ion-button padding-start="5" (click)="cadastrar()" color="tertiary">
                   <ion-icon padding-end="5" name="add-circle-outline"></ion-icon>
-                  Logar
+                  cadastrar
               </ion-button>
           </ion-col>
-          <ion-col size-md="5" offset-md="3">
-            <ion-button padding-start="3" (click)="cadastrar()">
+          <ion-col size-md="2" offset-md="4" >
+            <ion-button (click)="logar()" color="success" [disabled]="f.invalid">
                 <ion-icon padding-end="5" name="add-circle-outline"></ion-icon>
-                Cadastrar
+                logar
             </ion-button>
         </ion-col>          
       </ion-row>        
     </ion-grid>
+  </form>
   </div>
 </ion-content>
