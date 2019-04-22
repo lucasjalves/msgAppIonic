@@ -13,12 +13,12 @@
       {{c.nome}}
     </ion-label>
   </ion-item>
-  <ion-grid *ngIf="usuario.contatos.length === 0">
-    <ion-row>
-      <ion-text color="tertiary">Você não tem contatos adicionados</ion-text>
+  <ion-grid >
+    <ion-row *ngIf="usuario.contatos.length === 0">
+      <ion-text color="danger">Você não tem contatos adicionados</ion-text>
     </ion-row>
     <ion-row>
-      <ion-button (click)="adicionar()"  color="tertiary">
+      <ion-button (click)="adicionar()">
         <ion-icon name="contacts"></ion-icon>
         Adicionar
       </ion-button>       

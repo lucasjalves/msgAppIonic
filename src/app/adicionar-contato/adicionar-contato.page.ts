@@ -29,18 +29,28 @@ export class AdicionarContatoPage implements OnInit {
   async adicionar() {
     const self = this;
     try {
+
       const contatoDuplicado: boolean =
-        await self.isContatoExistente();
+        await self.isContatoDuplicado();
 
       if (contatoDuplicado) {
         this.mostrarModal('Contato já cadastrado');
         return;
       }
 
+      const contatoExistente: Usuario =
+        await this.isContatoExistente();
+
+      if (contatoExistente === null || contatoExistente === undefined) {
+        this.mostrarModal('Verifique o email do contato');
+        return;
+      }
       const usuarioLogado = await this.service.getUsuarioLogado();
+      this.contato.id = contatoExistente.id;
       usuarioLogado.contatos.push(this.contato);
 
       this.service.alterarUsuario(usuarioLogado);
+      this.mostrarModal('Contato adicionado com sucesso!');
     } catch (err) {
       this.mostrarModal('Ocorreu um erro');
     }
@@ -56,9 +66,16 @@ export class AdicionarContatoPage implements OnInit {
     await alert.present();
   }
 
-  async isContatoExistente() {
+  async isContatoDuplicado() {
     const usuarioLogado: Usuario = await this.service.getUsuarioLogado();
     return usuarioLogado.contatos
       .filter((contato) => contato.email === this.contato.email).length > 0;
+  }
+
+  async isContatoExistente() {
+    const usuarios: Usuario[] = await this.service.consultarUsuario();
+    console.log(usuarios);
+    return usuarios
+      .filter((usuario) => usuario.email === this.contato.email)[0];
   }
 }

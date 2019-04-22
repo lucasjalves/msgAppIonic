@@ -2,12 +2,13 @@ import { Mensagem } from './mensagem.model';
 import { Serializable } from '../common/serializable.interface';
 
 export class Contato implements Serializable<Contato> {
-
+    id: string;
     nome: string;
     email: string;
     mensagens: Mensagem[] = new Array<Mensagem>();
 
     deserialize(input): Contato {
+        this.id = input.id;
         this.nome = input.nome;
         this.email = input.email;
         this.mensagens = [];

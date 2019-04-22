@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../model/usuario.model';
 import { UsuarioService } from '../service/usuario.service';
+import { Router } from '@angular/router';
+import { MensagemService } from '../service/mensagem.service';
 
 @Component({
   selector: 'app-principal',
@@ -10,7 +12,10 @@ import { UsuarioService } from '../service/usuario.service';
 export class PrincipalPage implements OnInit {
 
   public usuario: Usuario = new Usuario();
-  constructor(private service: UsuarioService) { }
+  public conversas: Object = [];
+
+  constructor(private service: UsuarioService, private router: Router,
+    private mensagemService: MensagemService) { }
 
   async ngOnInit() {
     const email: string = localStorage.getItem('usuario');
@@ -20,10 +25,13 @@ export class PrincipalPage implements OnInit {
     const self = this;
     const usuarios: Usuario[] = await this.service.consultarUsuario();
     this.usuario = usuarios.filter((usuario) => usuario.email === email)[0];
-    console.log(this.usuario);
+    this.mensagemService.consultar(this.usuario.id).subscribe((next) => {
+
+    });
+
   }
 
   adicionar() {
-
+    this.router.navigateByUrl('/adicionar-contato');
   }
 }

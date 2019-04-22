@@ -21,7 +21,6 @@ export class UsuarioService {
     this.usuarios = [];
     const self = this;
     const q: firebase.firestore.QuerySnapshot = await this.db.collection('usuarios').get().toPromise();
-
     q.forEach(function(queryDocument) {
       const u: Usuario = new Usuario().deserialize(queryDocument.data());
       u.id = queryDocument.id;
@@ -50,4 +49,9 @@ export class UsuarioService {
 
       return usuarioLogado;
   }
+
+  consultarPorId(id: string) {
+    return this.db.collection('usuarios').get();
+  }
+
 }

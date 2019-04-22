@@ -17,12 +17,12 @@
                 <ion-card-content>
                   <ion-item>
                     <ion-label position="floating">Apelido do contato(Opcional)</ion-label>
-                    <ion-input [(ngModel)]="contato.nome" clearInput ></ion-input>
+                    <ion-input [(ngModel)]="contato.nome" clearInput name="nome"></ion-input>
                   </ion-item>
   
                   <ion-item>
                     <ion-label position="floating">Email do contato</ion-label>
-                    <ion-input [(ngModel)]="contato.email" clearInput required name="email"></ion-input>
+                    <ion-input  name="email" [(ngModel)]="contato.email" clearInput required></ion-input>
                   </ion-item>
                 </ion-card-content>
               </ion-card>
