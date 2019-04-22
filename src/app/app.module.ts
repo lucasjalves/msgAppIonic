@@ -13,6 +13,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { UsuarioService } from './service/usuario.service';
+import { Usuario } from './model/usuario.model';
+import { AuthGuardRoutes } from './guard/authguard-routes';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +29,9 @@ import { FormsModule } from '@angular/forms';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    UsuarioService,
+    AuthGuardRoutes
   ],
   bootstrap: [AppComponent]
 })

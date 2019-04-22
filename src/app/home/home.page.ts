@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from '../usuario/usuario.model';
+import { Usuario } from '../model/usuario.model';
 import { UsuarioService } from '../service/usuario.service';
 import { AlertController } from '@ionic/angular';
 
@@ -35,7 +35,7 @@ export class HomePage {
     && usuario.senha === this.usuario.senha)[0];
 
     if (usuarioLogado) {
-      localStorage.setItem('usuarioLogado', usuarioLogado.email);
+      localStorage.setItem('usuario', usuarioLogado.email);
       this.router.navigateByUrl('/principal');
     } else {
       this.mostrarModal('E-mail ou senha incorretos');

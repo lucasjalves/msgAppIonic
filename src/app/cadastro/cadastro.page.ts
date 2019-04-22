@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '../usuario/usuario.model';
+import { Usuario } from '../model/usuario.model';
 import { UsuarioService } from '../service/usuario.service';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -55,7 +55,7 @@ export class CadastroPage implements OnInit {
   }
   async isUsuarioCadastrado() {
     const self = this;
-    let u: Usuario[] = await this.service.consultarUsuario();
+    const u: Usuario[] = await this.service.consultarUsuario();
     console.log(u.filter((usuario) => usuario.email === self.usuario.email));
     return u.filter((usuario) => usuario.email === self.usuario.email).length > 0;
   }

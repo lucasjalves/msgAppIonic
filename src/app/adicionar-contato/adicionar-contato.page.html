@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Adicionar contato</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="ion-padding">
+      <form #f="ngForm">
+        <ion-grid>
+          <ion-row>
+            <ion-col size-md="6" offset-md="3">
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-title>Cadastro</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-item>
+                    <ion-label position="floating">Apelido do contato(Opcional)</ion-label>
+                    <ion-input [(ngModel)]="contato.nome" clearInput ></ion-input>
+                  </ion-item>
+  
+                  <ion-item>
+                    <ion-label position="floating">Email do contato</ion-label>
+                    <ion-input [(ngModel)]="contato.email" clearInput required name="email"></ion-input>
+                  </ion-item>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size-md="1" offset-md="3">
+                <ion-button (click)="voltar()"  color="tertiary">
+                    <ion-icon padding-end="5" name="add-circle-outline"></ion-icon>
+                    Voltar
+                </ion-button>
+            </ion-col>          
+            <ion-col size-md="2" offset-md="4">
+              <ion-button padding-start="3" (click)="adicionar()" color="success" [disabled]="f.invalid">
+                <ion-icon padding-end="5" name="add-circle-outline"></ion-icon>
+                Adicionar
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </div>
+  </ion-content>
