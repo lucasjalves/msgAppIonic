@@ -25,6 +25,7 @@ export class Contato implements Serializable<Contato> {
             msgs.push(this.mensagens[i].serialize());
         }
         return {
+            id: this.id,
             nome: this.nome,
             email: this.email,
             mensagens: msgs

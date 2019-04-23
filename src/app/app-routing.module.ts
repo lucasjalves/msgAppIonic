@@ -11,8 +11,10 @@ const routes: Routes = [
     loadChildren: './principal/principal.module#PrincipalPageModule',
     canActivate: [AuthGuardRoutes] },
   { path: 'adicionar-contato',
-    loadChildren: './adicionar-contato/adicionar-contato.module#AdicionarContatoPageModule',
+    loadChildren: './contato/adicionar-contato/adicionar-contato.module#AdicionarContatoPageModule',
     canActivate: [AuthGuardRoutes]},
+  { path: 'visualizar-contato', loadChildren: './contato/visualizar-contato/visualizar-contato.module#VisualizarContatoPageModule' },
+
 ];
 
 @NgModule({

@@ -50,8 +50,8 @@ export class UsuarioService {
       return usuarioLogado;
   }
 
-  consultarPorId(id: string) {
-    return this.db.collection('usuarios').get();
+  consultarPorEmail(email: string) {
+    return this.db.collection('usuarios', ref => ref.where('email', '==', email)).get();
   }
 
 }

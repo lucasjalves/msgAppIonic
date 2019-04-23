@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Contato } from '../model/contato.model';
-import { UsuarioService } from '../service/usuario.service';
-import { Usuario } from '../model/usuario.model';
+import { Contato } from '../../model/contato.model';
+import { UsuarioService } from '../../service/usuario.service';
+import { Usuario } from '../../model/usuario.model';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -47,6 +47,7 @@ export class AdicionarContatoPage implements OnInit {
       }
       const usuarioLogado = await this.service.getUsuarioLogado();
       this.contato.id = contatoExistente.id;
+      console.log(this.contato);
       usuarioLogado.contatos.push(this.contato);
 
       this.service.alterarUsuario(usuarioLogado);

@@ -3,6 +3,7 @@ import { Usuario } from '../model/usuario.model';
 import { UsuarioService } from '../service/usuario.service';
 import { Router } from '@angular/router';
 import { MensagemService } from '../service/mensagem.service';
+import { QuerySnapshot } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-principal',
@@ -17,21 +18,27 @@ export class PrincipalPage implements OnInit {
   constructor(private service: UsuarioService, private router: Router,
     private mensagemService: MensagemService) { }
 
-  async ngOnInit() {
+    ngOnInit() {
     const email: string = localStorage.getItem('usuario');
     if (email === undefined || email === null) {
       throw new Error('Usuário não logado');
     }
     const self = this;
-    const usuarios: Usuario[] = await this.service.consultarUsuario();
-    this.usuario = usuarios.filter((usuario) => usuario.email === email)[0];
-    this.mensagemService.consultar(this.usuario.id).subscribe((next) => {
-
-    });
-
+    this.service.consultarPorEmail(email).toPromise()
+      .then(function(querySnapshot) {
+        querySnapshot.docs.forEach(function(doc) {
+          self.usuario = new Usuario().deserialize(doc.data());
+        });
+      });
   }
 
   adicionar() {
     this.router.navigateByUrl('/adicionar-contato');
+  }
+
+  visualizarContato(id) {
+    this.router.navigate(['/visualizar-contato'],{
+        queryParams: {  id: id  }
+      });
   }
 }
