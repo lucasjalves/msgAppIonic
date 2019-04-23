@@ -13,32 +13,35 @@ import { QuerySnapshot } from '@angular/fire/firestore';
 export class PrincipalPage implements OnInit {
 
   public usuario: Usuario = new Usuario();
+  private idLogado = '';
   public conversas: Object = [];
 
-  constructor(private service: UsuarioService, private router: Router,
-    private mensagemService: MensagemService) { }
+  constructor(private service: UsuarioService, private router: Router) {
+      this.atualizarContatos();
+  }
 
-    ngOnInit() {
-    const email: string = localStorage.getItem('usuario');
-    if (email === undefined || email === null) {
-      throw new Error('Usuário não logado');
-    }
-    const self = this;
-    this.service.consultarPorEmail(email).toPromise()
-      .then(function(querySnapshot) {
-        querySnapshot.docs.forEach(function(doc) {
-          self.usuario = new Usuario().deserialize(doc.data());
-        });
-      });
+  ngOnInit() {
+
   }
 
   adicionar() {
     this.router.navigateByUrl('/adicionar-contato');
   }
 
+  atualizarContatos() {
+    const email: string = localStorage.getItem('usuario');
+    const self = this;
+    this.service.consultarPorEmail(email).subscribe(querySnapshot => {
+      querySnapshot.docs.forEach(function(doc) {
+        self.usuario = new Usuario().deserialize(doc.data());
+        self.usuario.id = doc.id;
+      });
+    });
+  }
   visualizarContato(id) {
-    this.router.navigate(['/visualizar-contato'],{
-        queryParams: {  id: id  }
+    console.log(this.usuario.id);
+    this.router.navigate(['/visualizar-contato'], {
+        queryParams: {  id: id, 'idLogado': this.usuario.id}
       });
   }
 }

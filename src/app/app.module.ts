@@ -16,10 +16,9 @@ import { FormsModule } from '@angular/forms';
 import { UsuarioService } from './service/usuario.service';
 import { Usuario } from './model/usuario.model';
 import { AuthGuardRoutes } from './guard/authguard-routes';
-import { VisualizarContatoPipe } from './contato/visualizar-contato.pipe';
 
 @NgModule({
-  declarations: [AppComponent, VisualizarContatoPipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule,
     IonicModule.forRoot(),

@@ -6,6 +6,7 @@ export class CorpoMensagem implements Serializable<CorpoMensagem> {
     data: string;
     hora: string;
     rementente: string;
+    destinatario: string;
     constructor() {}
 
     deserialize(input): CorpoMensagem {
@@ -13,6 +14,7 @@ export class CorpoMensagem implements Serializable<CorpoMensagem> {
         this.data = input.data;
         this.hora = input.hora;
         this.rementente = input.rementente;
+        this.destinatario = input.destinatario;
         return this;
     }
     serialize(): Object {
@@ -20,7 +22,8 @@ export class CorpoMensagem implements Serializable<CorpoMensagem> {
             mensagem: this.mensagem,
             data: this.data,
             hora: this.hora,
-            rementente: this.rementente
+            rementente: this.rementente,
+            destinatario: this.destinatario
         };
     }
 }

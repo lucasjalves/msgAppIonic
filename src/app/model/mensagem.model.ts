@@ -9,12 +9,17 @@ export class Mensagem implements Serializable<Mensagem> {
     constructor() {}
 
     deserialize(input): Mensagem {
+       this.idDestinatario = input.idDestinatario;
+       this.idRemetente = input.idRemetente;
        this.mensagens = [];
+
+       if (input.mensagens === undefined) {
+           return this;
+       }
        for (let i = 0; i < input.mensagens.length ; i++) {
         this.mensagens.push(new CorpoMensagem().deserialize(input.mensagens[i]));
        }
-       this.idDestinatario = input.idDestinatario;
-       this.idRemetente = input.idRemetente;
+
        return this;
     }
     serialize(): Object {

@@ -6,7 +6,7 @@ export class Usuario implements Serializable<Usuario> {
     email: string;
     senha: string;
     id: string;
-    contatos: Contato[] = new Array<Contato>();
+    contatos: Contato[] = [];
     constructor() {
     }
 

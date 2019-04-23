@@ -8,7 +8,16 @@ export class MensagemService {
 
   constructor(private db: AngularFirestore) { }
 
-  consultar(idRemetente: string) {
-    return this.db.collection('mensagens', ref => ref.where('idRemetente', '==', idRemetente)).get();
+  consultar(idRemetente?: string) {
+    if (idRemetente !== undefined) {
+      return this.db.collection<Mensagem[]>('mensagens', ref => ref.where('idRemetente', '==', idRemetente));
+    }
+    return this.db.collection<Mensagem[]>('mensagens');
+  }
+
+
+  adicionar(msg: CorpoMensagem) {
+    
+    return this.db.collection('mensagens').add(msg);
   }
 }

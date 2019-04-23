@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'adicionar-contato',
     loadChildren: './contato/adicionar-contato/adicionar-contato.module#AdicionarContatoPageModule',
     canActivate: [AuthGuardRoutes]},
-  { path: 'visualizar-contato', loadChildren: './contato/visualizar-contato/visualizar-contato.module#VisualizarContatoPageModule' },
+  { path: 'visualizar-contato', loadChildren: './contato/visualizar-contato/visualizar-contato.module#VisualizarContatoPageModule',
+    canActivate: [AuthGuardRoutes] },
 
 ];
 

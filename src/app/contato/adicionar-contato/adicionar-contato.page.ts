@@ -23,7 +23,7 @@ export class AdicionarContatoPage implements OnInit {
   }
 
   voltar() {
-    this.router.navigateByUrl('/principal');
+    this.router.navigate(['/principal']);
   }
 
   async adicionar() {
