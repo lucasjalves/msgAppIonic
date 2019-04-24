@@ -5,6 +5,7 @@ export class Mensagem implements Serializable<Mensagem> {
 
     idRemetente: string;
     idDestinatario: string;
+    id: string;
     mensagens: CorpoMensagem[] = new Array<CorpoMensagem>();
     constructor() {}
 

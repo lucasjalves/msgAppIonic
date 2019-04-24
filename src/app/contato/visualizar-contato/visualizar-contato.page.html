@@ -6,6 +6,11 @@
 
 <ion-content>
 
+  <div *ngFor="let m of mensagens.mensagens">
+
+    <ion-text *ngIf="m.remetente === id">(Você) {{m.mensagem}}</ion-text>
+    <ion-text *ngIf="m.destinatario === idContato">{{m.mensagem}}</ion-text>
+  </div>
 
 </ion-content>
 
@@ -13,10 +18,10 @@
   <ion-grid>
     <ion-row>
       <ion-col size="10"> 
-        <ion-input placeholder="Digite a mensagem..."></ion-input>
+        <ion-input placeholder="Digite a mensagem..." [(ngModel)]="msg"></ion-input>
       </ion-col>
       <ion-col size="2">  
-          <ion-icon name="arrow-round-forward"></ion-icon>
+          <ion-icon name="arrow-round-forward" (click)="enviarMensagem()"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-grid>

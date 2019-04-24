@@ -11,20 +11,22 @@ import { CorpoMensagem } from '../../model/corpo-mensagem.model';
 })
 export class VisualizarContatoPage implements OnInit {
 
-  private idContato: string;
-  private id: string;
-  private msg: string;
-  public mensagens: Mensagem[] = [];
+  public idContato: string;
+  public id: string;
+  public msg: string;
+  public mensagens: Mensagem;
 
+  public fodase = 'adsadasd';
   constructor(private route: ActivatedRoute, private mensagemService: MensagemService) {
-    this.route.queryParams.subscribe((params) => {
-     this.idContato = params.id;
-     this.id = params.idLogado;
-    });
-    this.carregarMensagens();
+
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      this.idContato = params.id;
+      this.id = params.idLogado;
+     });
+     this.carregarMensagens();
   }
 
   carregarNovasMensagens() {
@@ -33,29 +35,31 @@ export class VisualizarContatoPage implements OnInit {
       .subscribe((ob) => {
         ob.forEach(docChange => {
           const m: Mensagem =  new Mensagem().deserialize(docChange.payload.doc.data());
-          self.mensagens.push(m);
+          self.mensagens = m;
         });
       });
   }
 
   async carregarMensagens() {
-    this.mensagens = [];
+    this.mensagens = new Mensagem();
     const self = this;
     this.mensagemService.consultar().get().toPromise()
     .then(query => {
       query.docs.forEach(doc => {
         const m: Mensagem = new Mensagem().deserialize(doc.data());
-        if (doc.id === self.id) {
-          self.mensagens.push(m);
+        if (m.idDestinatario === self.idContato || m.idRemetente === self.id) {
+          self.mensagens = m;
         }
       });
     });
   }
 
   enviarMensagem() {
-    this.mensagemService.adicionar(this.gerarCorpo());
+    const self = this;
+    this.mensagemService.adicionar(this.gerarCorpo()).then(response => {
+      self.carregarMensagens();
+    });
   }
-
   private gerarCorpo(): CorpoMensagem {
     const dt: Date = new Date();
     const corpo: CorpoMensagem = new CorpoMensagem();
